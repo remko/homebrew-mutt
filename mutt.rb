@@ -43,6 +43,7 @@ class Mutt < Formula
   option "with-ignore-thread-patch", "Apply ignore-thread patch"
   option "with-confirm-attachment-patch", "Apply confirm attachment patch"
   option "with-trash-patch", "Apply trash folder patch"
+  option "with-gmail-custom-search-patch", "Apply gmail custom search folder patch"
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
@@ -74,6 +75,13 @@ class Mutt < Formula
     patch do
       url "https://raw.githubusercontent.com/remko/homebrew-mutt/master/patches/mutt-trashfolder.diff"
       sha256 "585e25f860e35871ee5b99c7778805800517c5719ac70074852c3894d42471a7"
+    end
+  end
+
+  if build.with? "gmail-custom-search-patch"
+    patch :p0 do
+      url "https://raw.githubusercontent.com/remko/homebrew-mutt/master/patches/mutt-gmail-custom-search.diff"
+      sha256 "1f8b0432bd0e6bad6cfc43eeb8ed21f8a98603f2020ae835b7882babb95aa89e"
     end
   end
 
