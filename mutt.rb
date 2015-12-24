@@ -42,6 +42,7 @@ class Mutt < Formula
   option "with-s-lang", "Build against slang instead of ncurses"
   option "with-ignore-thread-patch", "Apply ignore-thread patch"
   option "with-confirm-attachment-patch", "Apply confirm attachment patch"
+  option "with-trash-patch", "Apply trash folder patch"
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
@@ -66,6 +67,13 @@ class Mutt < Formula
     patch do
       url "https://gist.githubusercontent.com/tlvince/5741641/raw/c926ca307dc97727c2bd88a84dcb0d7ac3bb4bf5/mutt-attach.patch"
       sha256 "da2c9e54a5426019b84837faef18cc51e174108f07dc7ec15968ca732880cb14"
+    end
+  end
+
+  if build.with? "trash-patch"
+    patch do
+      url "https://raw.githubusercontent.com/remko/homebrew-mutt/master/patches/mutt-trashfolder.diff"
+      sha256 "585e25f860e35871ee5b99c7778805800517c5719ac70074852c3894d42471a7"
     end
   end
 
