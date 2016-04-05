@@ -5,14 +5,14 @@ purged when syncing the mailbox.
 Author: Cedric Duval
 Source: http://cedricduval.free.fr/mutt/patches/#trash
 
-diff -urN mutt-1.5.24/PATCHES mutt-1.5.24.new/PATCHES
---- mutt-1.5.24/PATCHES	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/PATCHES	2015-12-23 22:50:08.000000000 +0100
+diff -urN mutt-1.6.0/PATCHES mutt-1.6.0.new/PATCHES
+--- mutt-1.6.0/PATCHES	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/PATCHES	2016-04-05 22:49:10.000000000 +0200
 @@ -0,0 +1 @@
 +patch-1.5.16hg.cd.trash_folder.vl.1
-diff -urN mutt-1.5.24/commands.c mutt-1.5.24.new/commands.c
---- mutt-1.5.24/commands.c	2015-08-30 19:18:28.000000000 +0200
-+++ mutt-1.5.24.new/commands.c	2015-12-23 22:50:08.000000000 +0100
+diff -urN mutt-1.6.0/commands.c mutt-1.6.0.new/commands.c
+--- mutt-1.6.0/commands.c	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/commands.c	2016-04-05 22:49:10.000000000 +0200
 @@ -720,6 +720,7 @@
      if (option (OPTDELETEUNTAG))
        mutt_set_flag (Context, h, M_TAG, 0);
@@ -21,9 +21,9 @@ diff -urN mutt-1.5.24/commands.c mutt-1.5.24.new/commands.c
    
    return 0;
  }
-diff -urN mutt-1.5.24/flags.c mutt-1.5.24.new/flags.c
---- mutt-1.5.24/flags.c	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/flags.c	2015-12-23 22:50:08.000000000 +0100
+diff -urN mutt-1.6.0/flags.c mutt-1.6.0.new/flags.c
+--- mutt-1.6.0/flags.c	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/flags.c	2016-04-05 22:49:10.000000000 +0200
 @@ -65,7 +65,13 @@
        {
  	h->deleted = 0;
@@ -57,9 +57,9 @@ diff -urN mutt-1.5.24/flags.c mutt-1.5.24.new/flags.c
      case M_NEW:
  
        if (!mutt_bit_isset(ctx->rights,M_ACL_SEEN))
-diff -urN mutt-1.5.24/globals.h mutt-1.5.24.new/globals.h
---- mutt-1.5.24/globals.h	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/globals.h	2015-12-23 22:50:26.000000000 +0100
+diff -urN mutt-1.6.0/globals.h mutt-1.6.0.new/globals.h
+--- mutt-1.6.0/globals.h	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/globals.h	2016-04-05 22:49:10.000000000 +0200
 @@ -141,6 +141,7 @@
  WHERE char *Status;
  WHERE char *Tempdir;
@@ -68,10 +68,10 @@ diff -urN mutt-1.5.24/globals.h mutt-1.5.24.new/globals.h
  WHERE char *TSStatusFormat;
  WHERE char *TSIconFormat;
  WHERE short TSSupported;
-diff -urN mutt-1.5.24/imap/message.c mutt-1.5.24.new/imap/message.c
---- mutt-1.5.24/imap/message.c	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/imap/message.c	2015-12-23 22:50:08.000000000 +0100
-@@ -884,6 +884,7 @@
+diff -urN mutt-1.6.0/imap/message.c mutt-1.6.0.new/imap/message.c
+--- mutt-1.6.0/imap/message.c	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/imap/message.c	2016-04-05 22:49:10.000000000 +0200
+@@ -886,6 +886,7 @@
          if (ctx->hdrs[n]->tagged)
          {
            mutt_set_flag (ctx, ctx->hdrs[n], M_DELETE, 1);
@@ -79,7 +79,7 @@ diff -urN mutt-1.5.24/imap/message.c mutt-1.5.24.new/imap/message.c
            if (option (OPTDELETEUNTAG))
              mutt_set_flag (ctx, ctx->hdrs[n], M_TAG, 0);
          }
-@@ -891,6 +892,7 @@
+@@ -893,6 +894,7 @@
      else
      {
        mutt_set_flag (ctx, h, M_DELETE, 1);
@@ -87,10 +87,10 @@ diff -urN mutt-1.5.24/imap/message.c mutt-1.5.24.new/imap/message.c
        if (option (OPTDELETEUNTAG))
          mutt_set_flag (ctx, h, M_TAG, 0);
      }
-diff -urN mutt-1.5.24/init.h mutt-1.5.24.new/init.h
---- mutt-1.5.24/init.h	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/init.h	2015-12-23 22:50:08.000000000 +0100
-@@ -3341,6 +3341,16 @@
+diff -urN mutt-1.6.0/init.h mutt-1.6.0.new/init.h
+--- mutt-1.6.0/init.h	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/init.h	2016-04-05 22:49:10.000000000 +0200
+@@ -3419,6 +3419,16 @@
    ** provided that ``$$ts_enabled'' has been set. This string is identical in
    ** formatting to the one used by ``$$status_format''.
    */
@@ -107,10 +107,15 @@ diff -urN mutt-1.5.24/init.h mutt-1.5.24.new/init.h
  #ifdef USE_SOCKET
    { "tunnel",            DT_STR, R_NONE, UL &Tunnel, UL 0 },
    /*
-diff -urN mutt-1.5.24/mutt.h mutt-1.5.24.new/mutt.h
---- mutt-1.5.24/mutt.h	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/mutt.h	2015-12-23 22:50:08.000000000 +0100
-@@ -185,6 +185,7 @@
+diff -urN mutt-1.6.0/mutt-1.5.24/PATCHES mutt-1.6.0.new/mutt-1.5.24/PATCHES
+--- mutt-1.6.0/mutt-1.5.24/PATCHES	1970-01-01 01:00:00.000000000 +0100
++++ mutt-1.6.0.new/mutt-1.5.24/PATCHES	2016-04-05 22:48:55.000000000 +0200
+@@ -0,0 +1 @@
++patch-1.5.16hg.cd.trash_folder.vl.1
+diff -urN mutt-1.6.0/mutt.h mutt-1.6.0.new/mutt.h
+--- mutt-1.6.0/mutt.h	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/mutt.h	2016-04-05 22:49:10.000000000 +0200
+@@ -182,6 +182,7 @@
    M_DELETE,
    M_UNDELETE,
    M_DELETED,
@@ -118,7 +123,7 @@ diff -urN mutt-1.5.24/mutt.h mutt-1.5.24.new/mutt.h
    M_FLAG,
    M_TAG,
    M_UNTAG,
-@@ -713,6 +714,7 @@
+@@ -719,6 +720,7 @@
    unsigned int mime : 1;    		/* has a MIME-Version header? */
    unsigned int flagged : 1; 		/* marked important? */
    unsigned int tagged : 1;
@@ -126,7 +131,7 @@ diff -urN mutt-1.5.24/mutt.h mutt-1.5.24.new/mutt.h
    unsigned int deleted : 1;
    unsigned int changed : 1;
    unsigned int attach_del : 1; 		/* has an attachment marked for deletion */
-@@ -885,6 +887,7 @@
+@@ -891,6 +893,7 @@
    int new;			/* how many new messages? */
    int unread;			/* how many unread messages? */
    int deleted;			/* how many deleted messages */
@@ -134,10 +139,10 @@ diff -urN mutt-1.5.24/mutt.h mutt-1.5.24.new/mutt.h
    int flagged;			/* how many flagged messages */
    int msgnotreadyet;		/* which msg "new" in pager, -1 if none */
  
-diff -urN mutt-1.5.24/muttlib.c mutt-1.5.24.new/muttlib.c
---- mutt-1.5.24/muttlib.c	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/muttlib.c	2015-12-23 22:50:08.000000000 +0100
-@@ -1505,7 +1505,9 @@
+diff -urN mutt-1.6.0/muttlib.c mutt-1.6.0.new/muttlib.c
+--- mutt-1.6.0/muttlib.c	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/muttlib.c	2016-04-05 22:49:10.000000000 +0200
+@@ -1511,7 +1511,9 @@
  
    if (magic > 0 && !mx_access (s, W_OK))
    {
@@ -148,9 +153,9 @@ diff -urN mutt-1.5.24/muttlib.c mutt-1.5.24.new/muttlib.c
      {
        snprintf (tmp, sizeof (tmp), _("Append messages to %s?"), s);
        if ((rc = mutt_yesorno (tmp, M_YES)) == M_NO)
-diff -urN mutt-1.5.24/mx.c mutt-1.5.24.new/mx.c
---- mutt-1.5.24/mx.c	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/mx.c	2015-12-23 22:50:08.000000000 +0100
+diff -urN mutt-1.6.0/mx.c mutt-1.6.0.new/mx.c
+--- mutt-1.6.0/mx.c	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/mx.c	2016-04-05 22:49:10.000000000 +0200
 @@ -776,6 +776,53 @@
    return rc;
  }
@@ -228,7 +233,7 @@ diff -urN mutt-1.5.24/mx.c mutt-1.5.24.new/mx.c
  #ifdef USE_IMAP
    /* allow IMAP to preserve the deleted flag across sessions */
    if (ctx->magic == M_IMAP)
-@@ -1133,6 +1189,12 @@
+@@ -1140,6 +1196,12 @@
    msgcount = ctx->msgcount;
    deleted = ctx->deleted;
  
@@ -241,9 +246,9 @@ diff -urN mutt-1.5.24/mx.c mutt-1.5.24.new/mx.c
  #ifdef USE_IMAP
    if (ctx->magic == M_IMAP)
      rc = imap_sync_mailbox (ctx, purge, index_hint);
-diff -urN mutt-1.5.24/postpone.c mutt-1.5.24.new/postpone.c
---- mutt-1.5.24/postpone.c	2015-08-30 19:06:38.000000000 +0200
-+++ mutt-1.5.24.new/postpone.c	2015-12-23 22:50:08.000000000 +0100
+diff -urN mutt-1.6.0/postpone.c mutt-1.6.0.new/postpone.c
+--- mutt-1.6.0/postpone.c	2016-04-02 20:12:22.000000000 +0200
++++ mutt-1.6.0.new/postpone.c	2016-04-05 22:49:10.000000000 +0200
 @@ -277,6 +277,9 @@
    /* finished with this message, so delete it. */
    mutt_set_flag (PostContext, h, M_DELETE, 1);

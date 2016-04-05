@@ -11,22 +11,21 @@
 class Mutt < Formula
   desc "Mongrel of mail user agents (part elm, pine, mush, mh, etc.)"
   homepage "http://www.mutt.org/"
-  url "https://bitbucket.org/mutt/mutt/downloads/mutt-1.5.24.tar.gz"
-  mirror "ftp://ftp.mutt.org/pub/mutt/mutt-1.5.24.tar.gz"
-  sha256 "a292ca765ed7b19db4ac495938a3ef808a16193b7d623d65562bb8feb2b42200"
+  url "https://bitbucket.org/mutt/mutt/downloads/mutt-1.6.0.tar.gz"
+  mirror "ftp://ftp.mutt.org/pub/mutt/mutt-1.6.0.tar.gz"
+  sha256 "29afb6238ab7a540c0e3a78ce25c970f975ab6c0f0bc9f919993aab772136c19"
 
   bottle do
-    revision 2
-    sha256 "5bb0c9590b522bbcc38bfecaf0561810db2660792f472aa12a3b6c8f5e5b28d7" => :el_capitan
-    sha256 "8cad91b87b615984871b6bed35a029edcef006666bc7cf3b8f6b8b74d91c5b97" => :yosemite
-    sha256 "c57d868588eb947002902c90ee68af78298cbb09987e0150c1eea73f9e574cce" => :mavericks
+    sha256 "1e27fac20a479746cf1383308734e2bdcbaac23b8036d0a685a8a4843f8c4221" => :el_capitan
+    sha256 "4fccc940ea0d361347a56d990173b46ea8d1c33499dca4e3111538b91d1ceec9" => :yosemite
+    sha256 "0726d3cca276a4f7db0e338e942c20394f4e78a02f1417f9b6d4fb440908ec65" => :mavericks
   end
 
   head do
-    url "http://dev.mutt.org/hg/mutt#default", :using => :hg
+    url "https://dev.mutt.org/hg/mutt#default", :using => :hg
 
     resource "html" do
-      url "http://dev.mutt.org/doc/manual.html", :using => :nounzip
+      url "https://dev.mutt.org/doc/manual.html", :using => :nounzip
     end
   end
 
@@ -75,21 +74,21 @@ class Mutt < Formula
   if build.with? "trash-patch"
     patch do
       url "https://raw.githubusercontent.com/remko/homebrew-mutt/master/patches/mutt-trashfolder.diff"
-      sha256 "585e25f860e35871ee5b99c7778805800517c5719ac70074852c3894d42471a7"
+      sha256 "06eefa35d87c41ea6ed05483364d3d28af7a766f10231ac742d8c7eaa61d0e70"
     end
   end
 
   if build.with? "gmail-custom-search-patch"
-    patch :p0 do
+    patch do
       url "https://raw.githubusercontent.com/remko/homebrew-mutt/master/patches/mutt-gmail-custom-search.diff"
-      sha256 "1f8b0432bd0e6bad6cfc43eeb8ed21f8a98603f2020ae835b7882babb95aa89e"
+      sha256 "ad48cdbe897edf96ed70a3a64f0fa6bec38829b47c8dd523a0c33e87602cc11b"
     end
   end
 
   if build.with? "gmail-labels-patch"
     patch do
       url "https://raw.githubusercontent.com/remko/homebrew-mutt/master/patches/mutt-gmail-labels.diff"
-      sha256 "1179bf4a03587368ed8c9f0a68a8c3d46a93c699f3a57c978332ce5bae5fbc67"
+      sha256 "9a32e35e3df40cb2ddb411cc96447624b33a02dcb475f42940676f74a0ab04e6"
     end
   end
 
