@@ -29,14 +29,6 @@ class Mutt < Formula
     end
   end
 
-  unless Tab.for_name("signing-party").with? "rename-pgpring"
-    conflicts_with "signing-party",
-      :because => "mutt installs a private copy of pgpring"
-  end
-
-  conflicts_with "tin",
-    :because => "both install mmdf.5 and mbox.5 man pages"
-
   option "with-debug", "Build with debug option enabled"
   option "with-s-lang", "Build against slang instead of ncurses"
   option "with-ignore-thread-patch", "Apply ignore-thread patch"
@@ -107,6 +99,7 @@ class Mutt < Formula
       --enable-pop
       --enable-hcache
       --with-tokyocabinet
+      --enable-sidebar
     ]
 
     # This is just a trick to keep 'make install' from trying
